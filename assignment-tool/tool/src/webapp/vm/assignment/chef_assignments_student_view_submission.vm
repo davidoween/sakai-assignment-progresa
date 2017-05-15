@@ -21,14 +21,14 @@ $(document).ready(function(){
         $('.cloned a').show();
         ASN.resizeFrame('grow');
     });
-    
+
 });
 </script>
 ## Include other javascript specific to this page
 <script type="text/javascript" src="/sakai-assignment-tool/js/studentViewSubmission.js"></script>
 
 <div class="portletBody">
-dddddPOPO
+
 ## submission times
 	#set($timeReturned=false)
 	#set($timeReturned=$submission.TimeReturned)
@@ -82,21 +82,21 @@ dddddPOPO
 					<span class="highlight">
 						 - $tlang.getString("resubmit")
 					</span>
-				#end	
+				#end
 				</h3>
 			#end
 			#if ($returned)
 					#if ($!timeSubmitted && $!timeReturned && $!timeReturned.after($!timeSubmitted))
 					<p class="instruction">
 						$tlang.getString("stuviewsubm.asshasbee4") $submission.TimeReturned.toStringLocalFull(). $tlang.getString("stuviewsubm.plesub")
-					</p>	
+					</p>
 					#else
 					<p class="instruction">
 						$tlang.getString("stuviewsubm.asshasbee3") $submission.TimeSubmitted.toStringLocalFull().
 						#if ($!timeSubmitted && $!timeSubmitted.after($assignment.DueTime))
 							<span class="highlight"> $tlang.getString("gen.late")</span>
 						#end
-					</p>	
+					</p>
 					#end
 			#elseif ($submission.getGraded() && ($submission.getGradeReleased() || $returned))
 					$tlang.getString("stuviewsubm.asshasbee2")
@@ -111,8 +111,8 @@ dddddPOPO
 		#else
 			#if ($!allowAddAssignment)
 				<h3>PEPE $tlang.getString("subexampleassign")</h3>
-			#else 
-				<h3>PIPI $tlang.getString("gen.assig")
+			#else
+				<h3> $tlang.getString("gen.assig")
 					## no need to show status if this is for an non-electronic submission type of assignment
 					#if (!$!nonElectronicType)
 							<span class="highlight">
@@ -141,7 +141,7 @@ dddddPOPO
 						#end
 					</div>
 				#end
-			</p>	
+			</p>
 		#end
 	#end
 ##		<h4>$tlang.getString("gen.assdet")</h4>
@@ -190,7 +190,7 @@ dddddPOPO
 							$tlang.getString("allow.resubmit.number")
 						</th>
 						<td>
-							#if ($!resubmitNumber) $resubmitNumber #else 0 #end 
+							#if ($!resubmitNumber) $resubmitNumber #else 0 #end
 						</td>
 					</tr>
 					## resubmit close time
@@ -243,11 +243,11 @@ dddddPOPO
 						#end
 					</td>
 				</tr>
-				#end				
+				#end
 				#if ($withGrade)
 					#set ($gradeScale = $assignment.getContent().getTypeOfGradeString())
 					#if ($submission.getGraded() && $submission.getGradeReleased())
-						<tr>	
+						<tr>
 							<th>
 								$tlang.getString("gen.gra")
 							</th>
@@ -262,16 +262,16 @@ dddddPOPO
 										($tlang.getString("grade.max") $assignment.getContent().getMaxGradePointDisplay())
 									#end
 								</strong>
-									
+
 								<!--for grading via an external scoring service, if enabled for an associated gradebook item -->
 								#if($scoringComponentEnabled)
-									#parse ("/vm/assignment/chef_assignments_scoring_agent.vm")	
-							    #end								
-						         
+									#parse ("/vm/assignment/chef_assignments_scoring_agent.vm")
+							    #end
+
 							</td>
 						</tr>
 					#else
-						<tr>	
+						<tr>
 							<th>
 								$tlang.getString("gen.grasca")
 							</th>
@@ -280,17 +280,17 @@ dddddPOPO
 								#if ($gradeTypeTable.get($assignment.getContent().getTypeOfGrade()) == $!tlang.getString("points"))
 									($tlang.getString("grade.max") $assignment.getContent().getMaxGradePointDisplay())
 								#end
-								
+
 								<!--for grading via an external scoring service, if enabled for an associated gradebook item -->
 								#if($scoringComponentEnabled)
-									#parse ("/vm/assignment/chef_assignments_scoring_agent.vm")	
+									#parse ("/vm/assignment/chef_assignments_scoring_agent.vm")
 								#end
-						        
+
 							</td>
 						</tr>
 					#end
 				#end
-				##show alert when assignment is modified and the modified date is after its open date	
+				##show alert when assignment is modified and the modified date is after its open date
 				#set($newAssignment="false")
 				#set($newAssignment=$assignment.getProperties().getProperty("newAssignment"))
 				#if ($assignment.getTimeLastModified().after($assignment.getOpenTime()) && !$!newAssignment.equalsIgnoreCase("true"))
@@ -340,7 +340,7 @@ dddddPOPO
 									</div>
 								#end
 							</td>
-				
+
 					</tr>
 				#end
 				#if ($!submission && $!submission.getSubmissionLog().size() > 0)
@@ -357,15 +357,15 @@ dddddPOPO
 		<h4>
 			$tlang.getString("gen.instr")
 		</h4>
-		
+
 		#if ($!assignment.getContent().getInstructions().length()>0)
 			<div class="textPanel">$validator.escapeHtmlFormattedText($!assignment.getContent().getInstructions())</div>
 		#end
 		## assignment attachment
 		#set ($size = 0)
 		#set ($props = false)
-		#foreach ($attachment in $assignment.getContent().getAttachments()) 
-			#set ($props = $attachment.Properties) 
+		#foreach ($attachment in $assignment.getContent().getAttachments())
+			#set ($props = $attachment.Properties)
 			#if ($!props)
 				#set ($size = $size + 1)
 			#end
@@ -373,11 +373,11 @@ dddddPOPO
 		#if ($size > 0)
 			<h4>
 				$tlang.getString("gen.addres2")
-			</h4>	
+			</h4>
 				<ul class="attachList indnt1">
-					#foreach ($attachment in $assignment.getContent().getAttachments()) 
+					#foreach ($attachment in $assignment.getContent().getAttachments())
 						#set ($props = false)
-						#set ($props = $attachment.Properties) 
+						#set ($props = $attachment.Properties)
 						#if ($!props)
 							<li>
 								#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -385,7 +385,7 @@ dddddPOPO
 								#else
 									<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 								#end
-									<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+									<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 								#propertyDetails($props)
 							</li>
 						#end
@@ -402,8 +402,8 @@ dddddPOPO
 						<ul class="attachList">
 							#set ($size = 0)
 							#set ($props = false)
-							#foreach ($attachment in $!mAttachments) 
-								#set ($props = $attachment.Properties) 
+							#foreach ($attachment in $!mAttachments)
+								#set ($props = $attachment.Properties)
 								#if ($!props)
 									#set ($size = $size + 1)
 								#end
@@ -419,7 +419,7 @@ dddddPOPO
 							#else
 								#foreach ($attachment in $mAttachments)
 									#set ($props = false)
-									#set ($props = $attachment.Properties) 
+									#set ($props = $attachment.Properties)
 									#if ($!props)
 									<li>
 										#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -427,7 +427,7 @@ dddddPOPO
 										#else
 											<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 										#end
-										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 										#propertyDetails($props)
 									</li>
 									#end
@@ -452,8 +452,8 @@ dddddPOPO
 						<ul class="attachList">
 							#set ($size = 0)
 							#set ($props = false)
-							#foreach ($attachment in $!aAttachments) 
-								#set ($props = $attachment.Properties) 
+							#foreach ($attachment in $!aAttachments)
+								#set ($props = $attachment.Properties)
 								#if ($!props)
 									#set ($size = $size + 1)
 								#end
@@ -469,7 +469,7 @@ dddddPOPO
 							#else
 								#foreach ($attachment in $aAttachments)
 									#set ($props = false)
-									#set ($props = $attachment.Properties) 
+									#set ($props = $attachment.Properties)
 									#if ($!props)
 									<li>
 										#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -477,7 +477,7 @@ dddddPOPO
 										#else
 											<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 										#end
-										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 										#propertyDetails($props)
 									</li>
 									#end
@@ -491,10 +491,10 @@ dddddPOPO
 		#end
 		<hr class="itemSeparator" />
 		#if ($returned)
-			<h3>$tlang.getString("gen.resubmission")</h3> 
+			<h3>$tlang.getString("gen.resubmission")</h3>
 		#else
-				<h3>$tlang.getString("gen.submission")</h3> 
-		#end	
+				<h3>$tlang.getString("gen.submission")</h3>
+		#end
 
 		## show special instruction if this is for an non-electronic submission type of assignment
 		#if ($!nonElectronicType)
@@ -508,7 +508,7 @@ dddddPOPO
 							<h3>$tlang.getString("gen.addinst2")</h3>
 						#else
 							<h3>$tlang.getString("gen.addinst")</h3>
-						#end	
+						#end
 							<div class="textPanel">$validator.escapeHtmlFormattedText($submission.FeedbackComment)</div>
 						#else
 					#end
@@ -517,16 +517,16 @@ dddddPOPO
 							<h4  id="toggleGen" class="toggleAnchor"><img alt="expand" class="expand" src="/library/image/sakai/expand.gif" /><img alt="collapse" class="collapse" src="/library/image/sakai/collapse.gif" />
 								$tlang.getString("gradingsub.prefee2")
 								</h4>
-					<div class="toggledContent gencoms">					
+					<div class="toggledContent gencoms">
 						$cheffeedbackhelper.showPrevFeedback($cheffeedbackhelper.escapeAssignmentFeedback($!prevFeedbackComment))</div>
-					#end					
+					#end
 					#set ($size = 0)
 					#set ($props = false)
-					#set ($feedbackAttachments = $submission.FeedbackAttachments)	
+					#set ($feedbackAttachments = $submission.FeedbackAttachments)
 					#set ($size = 0)
 					#set ($props = false)
-					#foreach ($attachment in $feedbackAttachments) 
-						#set ($props = $attachment.Properties) 
+					#foreach ($attachment in $feedbackAttachments)
+						#set ($props = $attachment.Properties)
 						#if ($!props)
 							#set ($size = $size + 1)
 						#end
@@ -536,9 +536,9 @@ dddddPOPO
 					#else
 						<h4>$tlang.getString("gen.addinstatts")</h4>
 						<ul class="attachList indnt1">
-							#foreach ($attachment in $feedbackAttachments) 
+							#foreach ($attachment in $feedbackAttachments)
 								#set ($props = false)
-								#set ($props = $attachment.Properties) 
+								#set ($props = $attachment.Properties)
 								#if ($!props)
 									<li>
 										#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -546,7 +546,7 @@ dddddPOPO
 										#else
 											<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 										#end
-										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 										#propertyDetails($props)
 									</li>
 								#end
@@ -570,7 +570,7 @@ dddddPOPO
 			## if a draft submission or the submission has been returned and has not yet submitted
 			## 1- text only; 2-attachment only; 3-text and attachment
 			#set ( $submissionType = $assignment.getContent().getTypeOfSubmission())
-			
+
 #if ($!assignment.isGroup())
 <h4>$tlang.getString("group.select.represent")</h4>
 		#if ($!groups)
@@ -594,23 +594,23 @@ dddddPOPO
                                                                     		#set($selected = true)
                                                                 	#end
 								#end
-								
+
 								<input type="radio" name="selectedGroups" id="id-$group.Id" title="$group.Id" value="$group.Id" #if($selected) checked="checked"#end />
 							</td>
 							<td headers="name" class="checkbox" style="white-space:nowrap">
 								<label for="id-$group.Id">
 									$validator.escapeHtml($group.Title)
-								</label>	
+								</label>
 							</td>
                                                         <td headers="description" width="100%"> ##mozilla does not resize table children dynamically , so set here
-							<span style="font-size: smaller; color: blue;">	
+							<span style="font-size: smaller; color: blue;">
 								#set($gusers = $assignmentService.getSortedGroupUsers($group))
 								#foreach ($user in $gusers)
 									$user.getDisplayName()
 									##$!userDirectoryService.getUser($user).getDisplayName()
 									#if ($velocityCount < $gusers.size()),#end
 								#end
-							</span>	
+							</span>
 
 								#set($description = $group.Description)
 								<div style="font-size: smaller;">$validator.escapeHtml($!description)</div>
@@ -627,11 +627,11 @@ dddddPOPO
 #end
 
 			## We are allowing the instructor to submit as long as assignment is not non-electronic and not deleted
-			#if (!$submissionType != 4 && !$!deleted.equalsIgnoreCase("true") && $!allowAddAssignment && $!allowSubmitByInstructor && $!student) 
+			#if (!$submissionType != 4 && !$!deleted.equalsIgnoreCase("true") && $!allowAddAssignment && $!allowSubmitByInstructor && $!student)
 				<h4>$tlang.getString("submitforstudent")</h4>
 				<p class="instruction">
 					$student.getDisplayName()
-					<input type="hidden" name="submit_on_behalf_of" id="submit_on_behalf_of" value="$student.id" />		
+					<input type="hidden" name="submit_on_behalf_of" id="submit_on_behalf_of" value="$student.id" />
 				</p>
 			#end
 
@@ -667,7 +667,7 @@ dddddPOPO
 							<table border="0">
 								<tr>
 									<td>
-										<textarea cols="80" rows="30" wrap="virtual" name="$name_submission_text" id="$name_submission_text" #if(!$allowSubmit)disabled="disabled"#end >#if($!value_submission_text)$validator.escapeHtmlFormattedTextarea($!value_submission_text)#end</textarea>						
+										<textarea cols="80" rows="30" wrap="virtual" name="$name_submission_text" id="$name_submission_text" #if(!$allowSubmit)disabled="disabled"#end >#if($!value_submission_text)$validator.escapeHtmlFormattedTextarea($!value_submission_text)#end</textarea>
 											#chef_setupformattedtextarea($name_submission_text)
 									</td>
 								</tr>
@@ -677,7 +677,7 @@ dddddPOPO
 						#set($feedbackText = $submission.FeedbackText)
 						#if ($!feedbackText && $feedbackText.length()>0)
 							#if ($!prevFeedbackText)
-								<h3>$tlang.getString("gen.orisub3")</h3>							
+								<h3>$tlang.getString("gen.orisub3")</h3>
 							#else
 								<h3>$tlang.getString("gen.orisub2")</h3>
 							#end
@@ -698,7 +698,7 @@ dddddPOPO
 								$tlang.getString("gen.yousub")
 							</div>
 							$validator.escapeHtmlFormattedText($!value_submission_text)
-						#end							
+						#end
 					#end*#
 				#end
 			#else
@@ -714,7 +714,7 @@ dddddPOPO
 				#end
 			#end
 
-			#if (($submissionType==2) || ($submissionType==3) || ($submissionType==5)) 
+			#if (($submissionType==2) || ($submissionType==3) || ($submissionType==5))
 				#if ($submissionType==2 && !$unsubmittableInline)
 					<p class="instruction">
 						#if (($submitted && !$returned) || ($returned && $!timeReturned && $!timeSubmitted && $!timeReturned.before($!timeSubmitted)) || ($!closeTime && $currentTime.after($closeTime)))
@@ -724,7 +724,7 @@ dddddPOPO
 							$tlang.getString("stuviewsubm.theassall2")
 						#end
 					</p>
-				#end	
+				#end
 				#if (($submissionType == 2) || ($submissionType == 5))
 					#if ($plagiarismNote)
 						<p>
@@ -756,7 +756,7 @@ dddddPOPO
 						#else
 							$tlang.getString("gen.att")
 						#end
-					</h3>	
+					</h3>
 					#if ($size == 0)
 						<p class="instruction">
                                                     #if ($submissionType == 5)
@@ -767,9 +767,9 @@ dddddPOPO
                                                 </p>
 					#else
 						<table class="attachList listHier indnt1 centerLines" style="margin-bottom:.5em;margin-top:0; width:auto" summary="$tlang.getString("stuviewsubm.listsummary")">
-							#foreach ($attachment in $attachments) 
+							#foreach ($attachment in $attachments)
 								#set ($props = false)
-								#set ($props = $attachment.Properties) 
+								#set ($props = $attachment.Properties)
 								#if ($!props)
 									<tr>
 										<td>
@@ -778,7 +778,7 @@ dddddPOPO
 											#else
 												<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 											#end
-											<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+											<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 										</td>
 										<td>
 											#propertyDetails($props)
@@ -797,12 +797,12 @@ dddddPOPO
 					#end
 					#if (($submissionType==2) || ($submissionType==3))
 						<div class="highlightPanel specialLink" style="margin:0;padding-bottom:.5em;background:#fff">
-							#if ($!deleted.equalsIgnoreCase("true")) 	 
-		    					##if the assignment has been deleted, disable the action button 	 
-		     					<input type="submit" name="eventSubmit_doAttachments" value="Attachment" accesskey="a" disabled="disabled" /> 	 
+							#if ($!deleted.equalsIgnoreCase("true"))
+		    					##if the assignment has been deleted, disable the action button
+		     					<input type="submit" name="eventSubmit_doAttachments" value="Attachment" accesskey="a" disabled="disabled" />
 		     				#else
 								#if ($!canSubmit)
-									#if ($size==0) 
+									#if ($size==0)
 										#set($howManySubAtts=$tlang.getString("stuviewsubm.attfromcomputerlabel"))
 										#set($howManySubAttsLinks=$tlang.getString("stuviewsubm.attfromserverlabel"))
 									#else
@@ -816,8 +816,8 @@ dddddPOPO
 												<span><label for="clonableUpload">$howManySubAtts</label></span>
 											</td>
 											<td>
-												<div id="clonableUploadW spinnerBesideContainer"> 
-													<input type="file" name="upload" class="upload" id="clonableUpload" #if($content_review_acceptedMimeTypes) accept="$content_review_acceptedMimeTypes" #end onchange="SPNR.insertSpinnerAfter( this, null, null ); document.getElementById('addSubmissionForm').action='#toolLinkParam("AssignmentAction" "doAttachUpload" "sakai_csrf_token=$validator.escapeUrl($sakai_csrf_token)")';ASN.submitForm( 'addSubmissionForm', null, null, null );"/> 
+												<div id="clonableUploadW spinnerBesideContainer">
+													<input type="file" name="upload" class="upload" id="clonableUpload" #if($content_review_acceptedMimeTypes) accept="$content_review_acceptedMimeTypes" #end onchange="SPNR.insertSpinnerAfter( this, null, null ); document.getElementById('addSubmissionForm').action='#toolLinkParam("AssignmentAction" "doAttachUpload" "sakai_csrf_token=$validator.escapeUrl($sakai_csrf_token)")';ASN.submitForm( 'addSubmissionForm', null, null, null );"/>
 												</div>
 											</td>
 											<td>
@@ -826,15 +826,15 @@ dddddPOPO
 														onclick="SPNR.disableControlsAndSpin( this, null ); ASN.submitForm( 'addSubmissionForm', 'attach', null, null ); return false;" />
 												</span>
 											</td>
-										</tr>	
+										</tr>
 										<tr>
 											<td></td>
 											<td id="clonedHolder"></td>
 											<td></td>
-											<td></td>										
+											<td></td>
 											</tr>
-									</table>	
-									
+									</table>
+
 								#end
 							#end
 						</div>
@@ -962,7 +962,7 @@ dddddPOPO
 							<h3>$tlang.getString("gen.addinst2")</h3>
 						#else
 							<h3>$tlang.getString("gen.addinst")</h3>
-						#end	
+						#end
 							<div class="textPanel">$validator.escapeHtmlFormattedText($submission.FeedbackComment)</div>
 						#else
 					#end
@@ -971,16 +971,16 @@ dddddPOPO
 							<h4  id="toggleGen" class="toggleAnchor"><img alt="expand" class="expand" src="/library/image/sakai/expand.gif" /><img alt="collapse" class="collapse" src="/library/image/sakai/collapse.gif" />
 								$tlang.getString("gradingsub.prefee2")
 								</h4>
-					<div class="toggledContent gencoms">					
+					<div class="toggledContent gencoms">
 						$cheffeedbackhelper.showPrevFeedback($cheffeedbackhelper.escapeAssignmentFeedback($!prevFeedbackComment))</div>
-					#end					
+					#end
 					#set ($size = 0)
 					#set ($props = false)
-					#set ($feedbackAttachments = $submission.FeedbackAttachments)	
+					#set ($feedbackAttachments = $submission.FeedbackAttachments)
 					#set ($size = 0)
 					#set ($props = false)
-					#foreach ($attachment in $feedbackAttachments) 
-						#set ($props = $attachment.Properties) 
+					#foreach ($attachment in $feedbackAttachments)
+						#set ($props = $attachment.Properties)
 						#if ($!props)
 							#set ($size = $size + 1)
 						#end
@@ -990,9 +990,9 @@ dddddPOPO
 					#else
 						<h4>$tlang.getString("gen.addinstatts")</h4>
 						<ul class="attachList indnt1">
-							#foreach ($attachment in $feedbackAttachments) 
+							#foreach ($attachment in $feedbackAttachments)
 								#set ($props = false)
-								#set ($props = $attachment.Properties) 
+								#set ($props = $attachment.Properties)
 								#if ($!props)
 									<li>
 										#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -1000,7 +1000,7 @@ dddddPOPO
 										#else
 											<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 										#end
-										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+										<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 										#propertyDetails($props)
 									</li>
 								#end
@@ -1016,8 +1016,8 @@ dddddPOPO
 						<div class="attachcoms  toggledContent">
 						#set ($size = 0)
 						#set ($props = false)
-						#foreach ($attachment in $!prevFeedbackAttachments) 
-							#set ($props = $attachment.Properties) 
+						#foreach ($attachment in $!prevFeedbackAttachments)
+							#set ($props = $attachment.Properties)
 							#if ($!props)
 								#set ($size = $size + 1)
 							#end
@@ -1032,9 +1032,9 @@ dddddPOPO
                                                         </p>
 						#else
 							<ul class="attachList indnt1">
-								#foreach ($attachment in $!prevFeedbackAttachments) 
+								#foreach ($attachment in $!prevFeedbackAttachments)
 									#set ($props = false)
-									#set ($props = $attachment.Properties) 
+									#set ($props = $attachment.Properties)
 									#if ($!props)
 										<li>
 											#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -1042,15 +1042,15 @@ dddddPOPO
 											#else
 												<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 											#end
-											<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+											<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 											#propertyDetails($props)
 										</li>
 									#end
 								#end
 							</ul>
-						#end	
+						#end
 					#end
-					</div>	
+					</div>
 				#end
 				#if ($withGrade)
 					#set ($previousGrades =  $!submission.Properties.getProperty($!submission.Properties.getNamePropSubmissionScaledPreviousGrades()))
@@ -1061,7 +1061,7 @@ dddddPOPO
 						<h4 id="toggleGrade" class="toggleAnchor"><img alt="expand" class="expand" src="/library/image/sakai/expand.gif" /><img alt="collapse" class="collapse" src="/library/image/sakai/collapse.gif" />
 							$tlang.getString("gradingsub.pregra")
 						</h4>
-						<div class="gradecoms  toggledContent">		
+						<div class="gradecoms  toggledContent">
 							$!previousGrades
 						</div>
 					#end
@@ -1109,7 +1109,7 @@ dddddPOPO
 									#set($name=$tlang.getString("gen.subm3"))
 								#end
 								<input type="button" class="active" name="post" accesskey="s" id="post" value="$!name"
-									onclick="SPNR.disableControlsAndSpin( this, null ); ASN.submitForm( 'addSubmissionForm', 'post', null, null ); return false;" 
+									onclick="SPNR.disableControlsAndSpin( this, null ); ASN.submitForm( 'addSubmissionForm', 'post', null, null ); return false;"
 								#if ($submitted && ($submissionType == 2 || $submissionType == 5) && !$!new_attachments && !$!newSingleUploadedFile && (!$!newSingleAttachmentList || $!newSingleAttachmentList.isEmpty()))
 									disabled="disabled"
 								#end
@@ -1168,8 +1168,8 @@ dddddPOPO
 				#set ($submittedAttachments = $submission.SubmittedAttachments)
 				#set ($size = 0)
 				#set ($props = false)
-				#foreach ($attachment in $submittedAttachments) 
-					#set ($props = $attachment.Properties) 
+				#foreach ($attachment in $submittedAttachments)
+					#set ($props = $attachment.Properties)
 					#if ($!props)
 						#set ($size = $size + 1)
 				 #end
@@ -1189,9 +1189,9 @@ dddddPOPO
 						#end
 					</h5>
 					<ul class="attachList indnt1">
-						#foreach ($attachment in $submittedAttachments) 
+						#foreach ($attachment in $submittedAttachments)
 							#set ($props = false)
-							#set ($props = $attachment.Properties) 
+							#set ($props = $attachment.Properties)
 							#if ($!props)
 								<li>
 									#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -1199,13 +1199,13 @@ dddddPOPO
 									#else
 										<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 									#end
-									<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+									<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 									#propertyDetails($props)
 								</li>
 							#end
 						#end
 					</ul>
-				#end	
+				#end
 				#if ($withGrade && $submission.getGraded() && $submission.getGradeReleased())
 					#if ($submission.getGradeReleased() &&($!submission.FeedbackComment) && ($submission.FeedbackComment.trim().length()>0))
 						<h5>$tlang.getString("gen.addinst")</h5>
@@ -1216,14 +1216,14 @@ dddddPOPO
 					#if ($!prevFeedbackComment && $!prevFeedbackComment.trim().length() > 0)
 						<h5>$tlang.getString("gradingsub.prefee")</h5>
 						<div class="textPanel">$cheffeedbackhelper.showPrevFeedback($cheffeedbackhelper.escapeAssignmentFeedback($!prevFeedbackComment))</div>
-					#end	
+					#end
 					#set ($size = 0)
 					#set ($props = false)
 					#set ($feedbackAttachments = $submission.FeedbackAttachments)
 					#set ($size = 0)
 					#set ($props = false)
-					#foreach ($attachment in $feedbackAttachments) 
-						#set ($props = $attachment.Properties) 
+					#foreach ($attachment in $feedbackAttachments)
+						#set ($props = $attachment.Properties)
 						#if ($!props)
 							#set ($size = $size + 1)
 						#end
@@ -1233,9 +1233,9 @@ dddddPOPO
 					#else
 						<h5>$tlang.getString("gen.addinst")</h5>
 						<ul class="attachList indnt1">
-									#foreach ($attachment in $feedbackAttachments) 
+									#foreach ($attachment in $feedbackAttachments)
 										#set ($props = false)
-										#set ($props = $attachment.Properties) 
+										#set ($props = $attachment.Properties)
 										#if ($!props)
 											<li>
 												#if ($props.getBooleanProperty($props.NamePropIsCollection))
@@ -1243,7 +1243,7 @@ dddddPOPO
 												#else
 													<img src = "#imageLink($contentTypeImageService.getContentTypeImage($props.getProperty($props.NamePropContentType)))" border="0" alt="$tlang.getString("gen.filatt")" />
 												#end
-												<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>						
+												<a href="$attachment.Url" target="_blank">$validator.escapeHtml($props.getPropertyFormatted($props.NamePropDisplayName))</a>
 												#propertyDetails($props)
 											</li>
 										#end
@@ -1260,12 +1260,12 @@ dddddPOPO
 							<h4 id="toggleGrade" class="toggleAnchor"><img alt="expand" class="expand" src="/library/image/sakai/expand.gif" /><img alt="collapse" class="collapse" src="/library/image/sakai/collapse.gif" />
 								$tlang.getString("gradingsub.pregra")
 							</h4>
-							<div class="gradecoms  toggledContent">		
+							<div class="gradecoms  toggledContent">
 								$!previousGrades.length()$!previousGrades
 							</div>
 						#end
 					#end
-		<h4>pasudpioasidposaidopi</h4>	
+		<h4>pasudpioasidposaidopi</h4>
 		#if ($!linkInvoked)
 			<input type="submit" accesskey="x" onClick="SPNR.disableControlsAndSpin( this, null ); window.close();" name="eventSubmit_doConfirm_assignment_submission" value="$tlang.getString("gen.closeexit")" class="disableme"/>
 		#else
@@ -1275,8 +1275,8 @@ dddddPOPO
 		#end
 		#end
 		<input type="hidden" name="sakai_csrf_token" value="$sakai_csrf_token" />
-		
-		
+
+
 	</form>
 	#end
 </div>
